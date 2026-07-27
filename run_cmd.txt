@@ -1,0 +1,3 @@
+g++ -std=c++17 byteCoder.cpp lexer.cpp -I. -o byteCoder.exe
+
+byteCoder.exe

@@ -19,6 +19,8 @@ enum class TokenType {
     TO,
     ON,
     AFTER,
+    ACTION,
+    SET,
     // Literals and numbers
     INDENTIFIER,
     NUMBER,
@@ -26,7 +28,7 @@ enum class TokenType {
     //Symbols
     EQUALS,
     COMMA,  //,
-    LOAREN, //(
+    LPAREN, //(
     RPAREN, //)
     SEMICOLON, //;
     //Control tokens
