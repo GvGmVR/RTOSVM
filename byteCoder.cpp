@@ -11,11 +11,11 @@ int main(){
     fs::path filePath = "blink.dsl";
 
     if (filePath.extension()== ".dsl"){
-        std::cout << "[Read File]: dsl file read";
+        std::cout << "[Read File]: DSL file read";
     }else{
-        std::cout << "[Read File]: dsl file not found or read";
+        std::cout << "[Read File]: DSL file not found or read";
         return 1;
     }
 
-    lexer(filePath);
+    std::vector<Token> tokens = lexer(filePath);
 }

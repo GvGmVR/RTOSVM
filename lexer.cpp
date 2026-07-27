@@ -1,8 +1,10 @@
 //lexer.cpp
-#include <iostream>
-#include <filesystem>
-#include <string>
+#include "functions.h"
+#include <fstream>
+#include <sstream>
+#include <unordered_map>
+#include <cctype>
 
-void lexer(const std::filesystem::path& filepath){
+std::vector<Token> lexer(const std::filesystem::path& filepath){
 
 }
