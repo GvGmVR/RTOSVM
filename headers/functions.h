@@ -21,8 +21,10 @@ enum class TokenType {
     AFTER,
     ACTION,
     SET,
+    IN,
+    STATE,
     // Literals and numbers
-    INDENTIFIER,
+    IDENTIFIER,
     NUMBER,
     STRING,
     //Symbols

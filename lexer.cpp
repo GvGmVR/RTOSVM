@@ -1,5 +1,5 @@
 //lexer.cpp
-#include "functions.h"
+#include "headers/functions.h"
 #include <fstream>
 #include <sstream>
 #include <unordered_map>
@@ -20,7 +20,9 @@ static const std::unordered_map<std::string, TokenType> keywords = {
     {"ON", TokenType::ON},
     {"AFTER", TokenType::AFTER},
     {"ACTION", TokenType::ACTION},
-    {"SET", TokenType::SET}
+    {"SET", TokenType::SET},
+    {"STATE",TokenType::STATE},
+    {"IN", TokenType::IN}
 };
 
 std::vector<Token> lexer(const std::filesystem::path& filepath){
@@ -29,7 +31,7 @@ std::vector<Token> lexer(const std::filesystem::path& filepath){
     //Read dsl file
     std::ifstream file(filepath);
     if(!file.is_open()){
-        std::cerr << "[Lexer Error]: Could not open file " << filepath << "\n";
+        std::cerr << "[Lexer Error]: Could not open file " << filepath << std::endl;
         return tokens;
     }
 
@@ -45,7 +47,7 @@ std::vector<Token> lexer(const std::filesystem::path& filepath){
 
     //Scanner loop
     while(cursor < length){
-        char c = src[cursor];
+        unsigned char c = static_cast<unsigned char>(src[cursor]);
 
         // Remove whitespace and track line/column numbers
         if(std::isspace(c)){
@@ -104,7 +106,7 @@ std::vector<Token> lexer(const std::filesystem::path& filepath){
         if(std::isalpha(c)|| c=='_'){
             int startcol = column;
             std::string word ="";
-            while(cursor<length && (std::isalnum(src[cursor])|| src[cursor]=='_')){
+            while (cursor < length && (std::isalnum(static_cast<unsigned char>(src[cursor])) || src[cursor] == '_')) {
                 word+=src[cursor];
                 cursor++;
                 column++;
@@ -113,7 +115,7 @@ std::vector<Token> lexer(const std::filesystem::path& filepath){
             if (it != keywords.end()){
                 tokens.push_back({it->second, word, line, startcol});
             }else{
-                tokens.push_back({TokenType::INDENTIFIER, word, line, startcol});
+                tokens.push_back({TokenType::IDENTIFIER, word, line, startcol});
             }
             continue;
         }
@@ -122,7 +124,7 @@ std::vector<Token> lexer(const std::filesystem::path& filepath){
         if(std::isdigit(c)){
             int startcol = column;
             std::string numStr="";
-            while(cursor<length && std::isdigit(src[cursor])){
+            while (cursor < length && std::isdigit(static_cast<unsigned char>(src[cursor]))) {
                 numStr+=src[cursor];
                 cursor++;
                 column++;
