@@ -1,3 +1,6 @@
 g++ -std=c++17 byteCoder.cpp lexer.cpp parser.cpp symbol_table.cpp bytecode_gen.cpp -I. -o byteCoder.exe
-
 byteCoder.exe
+
+// After bytecode generation
+g++ -std=c++17 vm/vm_main.cpp vm/vm_engine.cpp vm/vm_hal.cpp -Ivm -o rtos_vm.exe
+rtos_vm.exe blink.bc

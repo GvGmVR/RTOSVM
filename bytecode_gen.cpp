@@ -3,6 +3,12 @@
 #include <iostream>
 #include <iomanip>
 
+/* Serialization Rules:
+Opcode: 1 byte (uint8_t).
+String: 4-byte Int32 (length L) +L bytes of ASCII characters.
+Int32: 4 bytes (int32_t).
+Byte/Flag: 1 byte (uint8_t). */
+
 void BytecodeGenerator::emitByte(uint8_t byte) {
     bytecode.push_back(byte);
 }
